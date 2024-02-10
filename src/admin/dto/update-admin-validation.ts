@@ -2,8 +2,7 @@ import * as Joi from 'joi';
 import { CONSTANT } from '../../shared/constants/message';
 
 export const adminUpdateSchema = Joi.object({
-  first_name: Joi.string().label('First name'),
-  last_name: Joi.string().label('Last name'),
+  name: Joi.string().label('First name'),
   email: Joi.string().email().label('Email'),
   password: Joi.string()
     .min(8)

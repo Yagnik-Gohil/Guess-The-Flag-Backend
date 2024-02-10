@@ -9,6 +9,7 @@ import {
   Res,
   Next,
   Req,
+  Query,
 } from '@nestjs/common';
 import { AdminService } from './admin.service';
 import { CreateAdminDto } from './dto/create-admin.dto';
@@ -59,11 +60,11 @@ export class AdminController {
   async findAll(
     @Req() req: Request,
     @Res() res: Response,
+    @Query('limit') limit: string = process.env.LIMIT,
+    @Query('offset') offset: string = process.env.OFFSET,
     @Next() next: NextFunction,
   ) {
     try {
-      const limit = req.query.limit ? req.query.limit : process.env.LIMIT;
-      const offset = req.query.offset ? req.query.offset : process.env.OFFSET;
       const where = {
         deleted_at: IsNull(),
       };
