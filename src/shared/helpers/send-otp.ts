@@ -9,7 +9,7 @@ const sendOtp = async (user: any, otp: number) => {
   const ejsTemplate = await renderFile(
     join(__dirname + '/../../../shared/ejs-templates/verification-otp.ejs'),
     {
-      name: user.first_name + ' ' + user.last_name,
+      name: user.name,
       minutes: 10,
       otp: otp,
     },

@@ -23,10 +23,9 @@ import { DefaultIpColumn } from 'src/shared/constants/enum';
 })
 export class PermissionModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
+    consumer.apply(verifyToken, authorize(['admin'])).forRoutes('permission');
     consumer
       .apply(
-        verifyToken,
-        authorize(['admin']),
         validationMiddleware(permissionCreateSchema),
         setIpAddress([
           DefaultIpColumn.CREATED_AT_IP,
@@ -36,18 +35,12 @@ export class PermissionModule implements NestModule {
       .forRoutes({ path: 'permission', method: RequestMethod.POST });
     consumer
       .apply(
-        verifyToken,
-        authorize(['admin']),
         validationMiddleware(permissionCreateSchema),
         setIpAddress([DefaultIpColumn.UPDATED_AT_IP]),
       )
       .forRoutes({ path: 'permission/:id', method: RequestMethod.PATCH });
     consumer
-      .apply(
-        verifyToken,
-        authorize(['admin']),
-        setIpAddress([DefaultIpColumn.DELETED_AT_IP]),
-      )
+      .apply(setIpAddress([DefaultIpColumn.DELETED_AT_IP]))
       .forRoutes({ path: 'permission/:id', method: RequestMethod.DELETE });
   }
 }
