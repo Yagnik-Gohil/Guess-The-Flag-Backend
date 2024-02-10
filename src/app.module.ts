@@ -14,6 +14,7 @@ import { AdminModule } from './admin/admin.module';
 import { RoleModule } from './role/role.module';
 import { PermissionModule } from './permission/permission.module';
 import { OtpModule } from './otp/otp.module';
+import { CountryModule } from './country/country.module';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { OtpModule } from './otp/otp.module';
     PermissionModule,
     RoleModule,
     OtpModule,
+    CountryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
